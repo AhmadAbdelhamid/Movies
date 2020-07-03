@@ -15,16 +15,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val movieDao = AppDatabase.getDatabase(application).movieDao()
     private val repo = MainRepository(movieDao)
-    private val movieDataSource =MovieDataSourceFactory(repo.dataSource(null))
-    val pagedListLiveData: LiveData<PagedList<Movie>>
 
+    val pagedListLiveData: LiveData<PagedList<Movie>>//observed in main Activity
 
     init {
-
+//page list config
     val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setPageSize(10).build()
-    //return pagedList liveData
+        val movieDataSource = MovieDataSourceFactory(repo.dataSource())
+        //return pagedList liveData
         pagedListLiveData = LivePagedListBuilder(movieDataSource, pagedListConfig).build()
 
     }

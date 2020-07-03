@@ -6,7 +6,7 @@ import androidx.paging.PageKeyedDataSource
 import com.example.moviestask.entity.Movie
 
 
-class MovieDataSourceFactory(val moviePagedKeyedDataSource: MoviePagedKeyedDataSource<Int, Movie>): DataSource.Factory<Int, Movie>() {
+class MovieDataSourceFactory(private val moviePagedKeyedDataSource: MoviePagedKeyedDataSource<Int, Movie>): DataSource.Factory<Int, Movie>() {
 
     //creating the mutable live data
     private val _pagedDataSource = MutableLiveData<PageKeyedDataSource<Int, Movie>>()
@@ -21,11 +21,9 @@ class MovieDataSourceFactory(val moviePagedKeyedDataSource: MoviePagedKeyedDataS
     }
 
 
-    //getter for itemlivedatasource
     fun getLiveDataSource(): MutableLiveData<PageKeyedDataSource<Int, Movie>> {
         return _pagedDataSource
     }
-
 
 
 }
